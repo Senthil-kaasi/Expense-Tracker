@@ -4,7 +4,7 @@ import "./ExpenseForm.css";
 function ExpenseForm(props){
     const [userInput,setUserInput] = useState({
         enteredTitle:"",
-        enteredAmout:"",
+        enteredAmount:"",
         enteredDate:""
     });
 
@@ -22,7 +22,7 @@ function ExpenseForm(props){
         event.preventDefault();
         const expenseData = {
             title:userInput.enteredTitle,
-            amount:userInput.enteredAmount,
+            amount:+userInput.enteredAmount,
             date:new Date(userInput.enteredDate)
         }
         setUserInput({
@@ -31,7 +31,7 @@ function ExpenseForm(props){
             enteredDate:""
         });
         props.onAddExpense(expenseData);
-        // console.log(expenseData);
+        props.onClickHandler(false);
     }
 
     return (
@@ -70,6 +70,7 @@ function ExpenseForm(props){
                 </div>
             </div>
             <div className="new-expense__actions">
+                    <button onClick={()=>{props.onClickHandler(false)}}>Cancel</button>
                     <button type="submit">Add Expense</button>
             </div>
         </form>
